@@ -9,7 +9,7 @@ WORKDIR /Sh
 
 #Copy the source code to Working directory
 
-COPY  /home/practice/docker/flask-app-ecs/.  /Sh
+COPY  .  /Sh
 
 
 #Install the required Dependencies
