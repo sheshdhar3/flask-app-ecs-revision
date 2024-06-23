@@ -1,0 +1,30 @@
+
+#Get the Base image of Python 3.9
+#----------------Stage1------------------
+FROM python:3.9 AS backend-builder
+
+#Create the working Directory for container
+WORKDIR /Sh
+
+#Copy the source code to Working directory
+COPY  .  /Sh
+
+
+#Install the required Dependencies
+RUN pip install -r requirements.txt
+
+#-------------------Stage2----------------------
+FROM python:3.9-slim
+
+WORKDIR /Sh
+
+COPY --from=backend-builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+
+COPY --from=backend-builder /Sh /Sh 
+
+#Now Run the python app
+CMD [ "python", "run.py" ]
+
+
+
+
